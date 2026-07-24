@@ -89,31 +89,39 @@ body::before {
     width: 100%;
 }
 
-/* Chatbot Floating Window Shadow & Pulse */
+/* Chatbot Floating Window Positioning & Visibility */
 #chatbot-window {
-    animation: chatSlideUp 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    position: fixed !important;
+    bottom: 96px !important;
+    right: 24px !important;
+    width: min(440px, 92vw) !important;
+    height: 520px !important;
+    z-index: 99999 !important;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transform: translateY(20px) scale(0.95);
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-@keyframes chatSlideUp {
-    from {
-        opacity: 0;
-        transform: translateY(20px) scale(0.95);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0) scale(1);
+#chatbot-window.chat-open {
+    opacity: 1 !important;
+    visibility: visible !important;
+    pointer-events: auto !important;
+    transform: translateY(0) scale(1) !important;
+}
+
+@media (max-width: 640px) {
+    #chatbot-window {
+        right: 4vw !important;
+        bottom: 84px !important;
+        height: 480px !important;
     }
 }
 
 /* Terminal Input glow */
 #terminal-input:focus {
     box-shadow: none;
-}
-
-/* Range Sliders Accent */
-input[type=range]::-webkit-slider-thumb {
-    cursor: pointer;
-    box-shadow: 0 0 10px rgba(16, 185, 129, 0.8);
 }
 
 /* Pulse Animation for System Theme */

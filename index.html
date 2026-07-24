@@ -41,31 +41,31 @@
     <canvas id="circuit-canvas" class="fixed inset-0 pointer-events-none z-0 opacity-40"></canvas>
 
     <!-- Floating Audio & AI Assistant Controls -->
-    <div class="fixed bottom-6 right-6 z-50 flex items-center gap-3">
+    <div class="fixed bottom-6 right-6 z-[10000] flex items-center gap-3">
         
         <!-- Sound FX Button -->
-        <button id="sound-toggle" aria-label="Toggle Sound Effects" class="p-3.5 bg-slate-900/90 border border-emerald-500/30 hover:border-emerald-400 text-emerald-400 rounded-full shadow-lg shadow-emerald-950/50 backdrop-blur-md transition-all hover:scale-110 group">
+        <button id="sound-toggle" aria-label="Toggle Sound Effects" class="p-3.5 bg-slate-900/90 border border-emerald-500/30 hover:border-emerald-400 text-emerald-400 rounded-full shadow-lg shadow-emerald-950/50 backdrop-blur-md transition-all hover:scale-110 group cursor-pointer">
             <i data-lucide="volume-2" class="w-5 h-5 group-hover:animate-pulse"></i>
         </button>
 
         <!-- System Pulse Button -->
-        <button id="theme-pulse" aria-label="Trigger Cyber Pulse" class="hidden sm:flex px-4 py-3 bg-slate-900/90 border border-cyan-500/30 hover:border-cyan-400 text-cyan-400 rounded-full text-xs font-mono font-semibold backdrop-blur-md transition-all hover:shadow-[0_0_15px_rgba(6,182,212,0.4)] items-center gap-2">
+        <button id="theme-pulse" aria-label="Trigger Cyber Pulse" class="hidden sm:flex px-4 py-3 bg-slate-900/90 border border-cyan-500/30 hover:border-cyan-400 text-cyan-400 rounded-full text-xs font-mono font-semibold backdrop-blur-md transition-all hover:shadow-[0_0_15px_rgba(6,182,212,0.4)] items-center gap-2 cursor-pointer">
             <span class="w-2 h-2 rounded-full bg-cyan-400 animate-ping"></span>
             SYS_PULSE
         </button>
 
         <!-- Floating Chatbot Trigger Button -->
-        <button id="chatbot-toggle-btn" class="px-5 py-3.5 bg-gradient-to-r from-emerald-500 via-teal-500 to-cyan-500 text-slate-950 font-bold font-mono text-xs rounded-full shadow-[0_0_25px_rgba(16,185,129,0.5)] hover:shadow-[0_0_35px_rgba(16,185,129,0.8)] backdrop-blur-md transition-all hover:scale-105 flex items-center gap-2.5 cursor-pointer">
+        <button id="chatbot-toggle-btn" onclick="toggleAdityaChat()" aria-label="Open AI Assistant" class="px-5 py-3.5 bg-gradient-to-r from-emerald-500 via-teal-500 to-cyan-500 text-slate-950 font-bold font-mono text-xs rounded-full shadow-[0_0_25px_rgba(16,185,129,0.5)] hover:shadow-[0_0_35px_rgba(16,185,129,0.8)] backdrop-blur-md transition-all hover:scale-105 flex items-center gap-2.5 cursor-pointer">
             <div class="relative flex items-center justify-center">
                 <i data-lucide="bot" class="w-5 h-5"></i>
-                <span class="absolute -top-1 -right-1 w-2 h-2 bg-slate-950 rounded-full"></span>
+                <span class="absolute -top-1 -right-1 w-2 h-2 bg-slate-950 rounded-full animate-ping"></span>
             </div>
             <span>ASK AI ASSISTANT</span>
         </button>
     </div>
 
     <!-- FLOATING AI CHATBOT MODAL WIDGET -->
-    <div id="chatbot-window" class="fixed bottom-24 right-4 sm:right-6 w-[92vw] sm:w-[440px] h-[540px] bg-slate-900/95 border-2 border-emerald-500/50 rounded-2xl shadow-[0_0_40px_rgba(2,6,23,0.95)] backdrop-blur-2xl z-50 flex-col overflow-hidden hidden transition-all" style="display: none;">
+    <div id="chatbot-window" class="bg-slate-900/95 border-2 border-emerald-500/60 rounded-2xl shadow-[0_0_50px_rgba(2,6,23,0.95)] backdrop-blur-2xl flex flex-col overflow-hidden">
         
         <!-- Chat Header -->
         <div class="bg-slate-950 px-4 py-3.5 border-b border-emerald-900/50 flex items-center justify-between">
@@ -81,7 +81,7 @@
                     <div class="font-mono text-[10px] text-emerald-400/80">Ask anything about Aditya's Profile</div>
                 </div>
             </div>
-            <button id="chatbot-close-btn" class="p-1.5 text-slate-400 hover:text-white hover:bg-slate-800 rounded-lg transition-colors cursor-pointer">
+            <button id="chatbot-close-btn" onclick="toggleAdityaChat()" class="p-1.5 text-slate-400 hover:text-white hover:bg-slate-800 rounded-lg transition-colors cursor-pointer">
                 <i data-lucide="x" class="w-5 h-5"></i>
             </button>
         </div>
@@ -93,33 +93,33 @@
                 <div class="w-7 h-7 rounded bg-emerald-950 border border-emerald-500/40 flex items-center justify-center text-emerald-400 shrink-0 font-bold text-xs">
                     AI
                 </div>
-                <div class="bg-slate-900 border border-emerald-500/30 text-slate-200 p-3 rounded-xl rounded-tl-none leading-relaxed max-w-[88%]">
-                    Welcome! I am <strong>Aditya's AI Resume Assistant</strong>. Ask me anything about his <strong>EV Charging Project</strong>, <strong>MQ-3 Alcohol System</strong>, <strong>Embedded C &amp; Arduino skills</strong>, <strong>College &amp; HSC/SSC marks</strong>, or <strong>Contact Telemetry</strong>!
+                <div class="bg-slate-900 border border-emerald-500/30 text-slate-200 p-3 rounded-xl rounded-tl-none leading-relaxed max-w-[88%] shadow-md">
+                    Welcome! I am <strong>Aditya's AI Resume Assistant</strong>. Ask me any question about his <strong>EV Charging Project</strong>, <strong>MQ-3 Alcohol System</strong>, <strong>Embedded C &amp; Arduino skills</strong>, <strong>College &amp; HSC/SSC marks</strong>, or <strong>Contact Telemetry</strong>!
                 </div>
             </div>
         </div>
 
         <!-- Quick Prompt Chips -->
         <div class="bg-slate-950/90 px-3 py-2 border-t border-slate-800/80 flex items-center gap-1.5 overflow-x-auto font-mono text-[11px] no-scrollbar">
-            <button class="chat-chip whitespace-nowrap px-2.5 py-1 bg-slate-900 hover:bg-emerald-950 border border-emerald-500/30 hover:border-emerald-400 text-emerald-400 rounded-md transition-all cursor-pointer">
+            <button onclick="sendQuickPrompt('EV Wireless Charging')" class="chat-chip whitespace-nowrap px-2.5 py-1 bg-slate-900 hover:bg-emerald-950 border border-emerald-500/30 hover:border-emerald-400 text-emerald-400 rounded-md transition-all cursor-pointer">
                 EV Wireless Charging
             </button>
-            <button class="chat-chip whitespace-nowrap px-2.5 py-1 bg-slate-900 hover:bg-cyan-950 border border-cyan-500/30 hover:border-cyan-400 text-cyan-400 rounded-md transition-all cursor-pointer">
+            <button onclick="sendQuickPrompt('Alcohol Detection System')" class="chat-chip whitespace-nowrap px-2.5 py-1 bg-slate-900 hover:bg-cyan-950 border border-cyan-500/30 hover:border-cyan-400 text-cyan-400 rounded-md transition-all cursor-pointer">
                 Alcohol Detection System
             </button>
-            <button class="chat-chip whitespace-nowrap px-2.5 py-1 bg-slate-900 hover:bg-teal-950 border border-teal-500/30 hover:border-teal-400 text-teal-400 rounded-md transition-all cursor-pointer">
+            <button onclick="sendQuickPrompt('Technical Skills')" class="chat-chip whitespace-nowrap px-2.5 py-1 bg-slate-900 hover:bg-teal-950 border border-teal-500/30 hover:border-teal-400 text-teal-400 rounded-md transition-all cursor-pointer">
                 Technical Skills
             </button>
-            <button class="chat-chip whitespace-nowrap px-2.5 py-1 bg-slate-900 hover:bg-purple-950 border border-purple-500/30 hover:border-purple-400 text-purple-400 rounded-md transition-all cursor-pointer">
+            <button onclick="sendQuickPrompt('Education & Marks')" class="chat-chip whitespace-nowrap px-2.5 py-1 bg-slate-900 hover:bg-purple-950 border border-purple-500/30 hover:border-purple-400 text-purple-400 rounded-md transition-all cursor-pointer">
                 Education &amp; Marks
             </button>
-            <button class="chat-chip whitespace-nowrap px-2.5 py-1 bg-slate-900 hover:bg-amber-950 border border-amber-500/30 hover:border-amber-400 text-amber-400 rounded-md transition-all cursor-pointer">
+            <button onclick="sendQuickPrompt('Contact & Phone')" class="chat-chip whitespace-nowrap px-2.5 py-1 bg-slate-900 hover:bg-amber-950 border border-amber-500/30 hover:border-amber-400 text-amber-400 rounded-md transition-all cursor-pointer">
                 Contact &amp; Phone
             </button>
         </div>
 
         <!-- Chat Input Form -->
-        <form id="chat-form" class="p-3 bg-slate-950 border-t border-slate-900 flex items-center gap-2">
+        <form id="chat-form" onsubmit="return handleChatFormSubmit(event)" class="p-3 bg-slate-950 border-t border-slate-900 flex items-center gap-2">
             <input type="text" id="chat-input" placeholder="Ask any question about Aditya's resume..." required class="flex-1 bg-slate-900 border border-slate-800 focus:border-emerald-400 rounded-lg px-3.5 py-2.5 text-xs font-mono text-slate-100 focus:outline-none transition-colors">
             <button type="submit" class="p-2.5 bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold rounded-lg transition-colors cursor-pointer flex items-center justify-center">
                 <i data-lucide="send" class="w-4 h-4"></i>
