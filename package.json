@@ -1,0 +1,22 @@
+{
+  "name": "aditya-gaikwad-portfolio",
+  "version": "1.0.0",
+  "description": "Dynamic Cyber-Hardware Portfolio of Aditya Anand Gaikwad - Final-Year ECE Student",
+  "main": "index.html",
+  "scripts": {
+    "start": "npx serve .",
+    "build": "echo 'Static build ready for Vercel deployment'"
+  },
+  "keywords": [
+    "portfolio",
+    "ece",
+    "embedded-systems",
+    "arduino",
+    "embedded-c",
+    "multisim",
+    "proteus",
+    "pcb-design"
+  ],
+  "author": "Aditya Anand Gaikwad",
+  "license": "MIT"
+}
