@@ -65,7 +65,7 @@
     </div>
 
     <!-- FLOATING AI CHATBOT MODAL WIDGET -->
-    <div id="chatbot-window" class="fixed bottom-24 right-4 sm:right-6 w-[92vw] sm:w-[420px] h-[520px] bg-slate-900/95 border-2 border-emerald-500/50 rounded-2xl shadow-[0_0_40px_rgba(2,6,23,0.9)] backdrop-blur-2xl z-50 flex-col overflow-hidden hidden transition-all" style="display: none;">
+    <div id="chatbot-window" class="fixed bottom-24 right-4 sm:right-6 w-[92vw] sm:w-[440px] h-[540px] bg-slate-900/95 border-2 border-emerald-500/50 rounded-2xl shadow-[0_0_40px_rgba(2,6,23,0.95)] backdrop-blur-2xl z-50 flex-col overflow-hidden hidden transition-all" style="display: none;">
         
         <!-- Chat Header -->
         <div class="bg-slate-950 px-4 py-3.5 border-b border-emerald-900/50 flex items-center justify-between">
@@ -75,10 +75,10 @@
                 </div>
                 <div>
                     <div class="font-space text-sm font-bold text-white flex items-center gap-2">
-                        ADITYA.AI ASSISTANT
+                        ADITYA.AI RESUME BOT
                         <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
                     </div>
-                    <div class="font-mono text-[10px] text-emerald-400/80">ECE &amp; Embedded Resume Bot</div>
+                    <div class="font-mono text-[10px] text-emerald-400/80">Ask anything about Aditya's Profile</div>
                 </div>
             </div>
             <button id="chatbot-close-btn" class="p-1.5 text-slate-400 hover:text-white hover:bg-slate-800 rounded-lg transition-colors cursor-pointer">
@@ -93,8 +93,8 @@
                 <div class="w-7 h-7 rounded bg-emerald-950 border border-emerald-500/40 flex items-center justify-center text-emerald-400 shrink-0 font-bold text-xs">
                     AI
                 </div>
-                <div class="bg-slate-900 border border-emerald-500/30 text-slate-200 p-3 rounded-xl rounded-tl-none leading-relaxed max-w-[85%]">
-                    Hello! I'm <strong>Aditya's AI Assistant</strong>. Ask me anything about his <strong>EV Wireless Charging</strong> project, <strong>Alcohol Detection System</strong>, Arduino &amp; Embedded C skills, or contact info!
+                <div class="bg-slate-900 border border-emerald-500/30 text-slate-200 p-3 rounded-xl rounded-tl-none leading-relaxed max-w-[88%]">
+                    Welcome! I am <strong>Aditya's AI Resume Assistant</strong>. Ask me anything about his <strong>EV Charging Project</strong>, <strong>MQ-3 Alcohol System</strong>, <strong>Embedded C &amp; Arduino skills</strong>, <strong>College &amp; HSC/SSC marks</strong>, or <strong>Contact Telemetry</strong>!
                 </div>
             </div>
         </div>
@@ -108,16 +108,19 @@
                 Alcohol Detection System
             </button>
             <button class="chat-chip whitespace-nowrap px-2.5 py-1 bg-slate-900 hover:bg-teal-950 border border-teal-500/30 hover:border-teal-400 text-teal-400 rounded-md transition-all cursor-pointer">
-                Skills &amp; Tech Stack
+                Technical Skills
             </button>
             <button class="chat-chip whitespace-nowrap px-2.5 py-1 bg-slate-900 hover:bg-purple-950 border border-purple-500/30 hover:border-purple-400 text-purple-400 rounded-md transition-all cursor-pointer">
-                Contact Info
+                Education &amp; Marks
+            </button>
+            <button class="chat-chip whitespace-nowrap px-2.5 py-1 bg-slate-900 hover:bg-amber-950 border border-amber-500/30 hover:border-amber-400 text-amber-400 rounded-md transition-all cursor-pointer">
+                Contact &amp; Phone
             </button>
         </div>
 
         <!-- Chat Input Form -->
         <form id="chat-form" class="p-3 bg-slate-950 border-t border-slate-900 flex items-center gap-2">
-            <input type="text" id="chat-input" placeholder="Ask about Projects, Skills, Contact..." required class="flex-1 bg-slate-900 border border-slate-800 focus:border-emerald-400 rounded-lg px-3.5 py-2.5 text-xs font-mono text-slate-100 focus:outline-none transition-colors">
+            <input type="text" id="chat-input" placeholder="Ask any question about Aditya's resume..." required class="flex-1 bg-slate-900 border border-slate-800 focus:border-emerald-400 rounded-lg px-3.5 py-2.5 text-xs font-mono text-slate-100 focus:outline-none transition-colors">
             <button type="submit" class="p-2.5 bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold rounded-lg transition-colors cursor-pointer flex items-center justify-center">
                 <i data-lucide="send" class="w-4 h-4"></i>
             </button>
@@ -150,14 +153,11 @@
                 <a href="#skills" class="nav-link text-slate-400 hover:text-emerald-400 transition-colors flex items-center gap-1.5">
                     <span class="text-emerald-500/50">03.</span>//SKILLS
                 </a>
-                <a href="#oscilloscope" class="nav-link text-slate-400 hover:text-emerald-400 transition-colors flex items-center gap-1.5">
-                    <span class="text-emerald-500/50">04.</span>//LAB_SCOPE
-                </a>
                 <a href="#education" class="nav-link text-slate-400 hover:text-emerald-400 transition-colors flex items-center gap-1.5">
-                    <span class="text-emerald-500/50">05.</span>//ACADEMICS
+                    <span class="text-emerald-500/50">04.</span>//ACADEMICS
                 </a>
                 <a href="#contact" class="nav-link text-slate-400 hover:text-emerald-400 transition-colors flex items-center gap-1.5">
-                    <span class="text-emerald-500/50">06.</span>//CONTACT
+                    <span class="text-emerald-500/50">05.</span>//CONTACT
                 </a>
             </nav>
 
@@ -179,7 +179,6 @@
             <a href="#about" class="block text-slate-300 hover:text-emerald-400">// ABOUT</a>
             <a href="#projects" class="block text-slate-300 hover:text-emerald-400">// PROJECTS</a>
             <a href="#skills" class="block text-slate-300 hover:text-emerald-400">// SKILLS</a>
-            <a href="#oscilloscope" class="block text-slate-300 hover:text-emerald-400">// LAB_SCOPE</a>
             <a href="#education" class="block text-slate-300 hover:text-emerald-400">// ACADEMICS</a>
             <a href="#contact" class="block text-slate-300 hover:text-emerald-400">// CONTACT</a>
         </div>
@@ -594,75 +593,6 @@
                             </div>
                         </div>
                     </div>
-                </div>
-
-            </div>
-        </section>
-
-        <!-- INTERACTIVE LAB OSCILLOSCOPE SIMULATOR SECTION -->
-        <section id="oscilloscope" class="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
-            <div class="bg-slate-900/90 border border-emerald-500/40 rounded-3xl p-6 sm:p-10 backdrop-blur-xl shadow-2xl">
-                
-                <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-6 mb-8 border-b border-slate-800 pb-6">
-                    <div>
-                        <div class="inline-flex items-center gap-2 text-xs font-mono text-emerald-400 mb-2">
-                            <i data-lucide="radio" class="w-4 h-4"></i>
-                            <span>LIVE HARDWARE LAB SIMULATOR</span>
-                        </div>
-                        <h2 class="text-2xl sm:text-4xl font-extrabold font-space text-white">INTERACTIVE OSCILLOSCOPE</h2>
-                        <p class="text-xs sm:text-sm font-mono text-slate-400 mt-1">Simulating real-time signal waveforms generated from ECE lab exercises.</p>
-                    </div>
-
-                    <!-- Waveform Selectors -->
-                    <div class="flex flex-wrap gap-2 font-mono text-xs">
-                        <button class="wave-btn px-4 py-2 bg-emerald-500 text-slate-950 font-bold rounded-lg transition-all cursor-pointer" data-type="sine">SINE WAVE</button>
-                        <button class="wave-btn px-4 py-2 bg-slate-950 text-slate-400 border border-slate-800 hover:text-emerald-400 rounded-lg transition-all cursor-pointer" data-type="square">SQUARE WAVE</button>
-                        <button class="wave-btn px-4 py-2 bg-slate-950 text-slate-400 border border-slate-800 hover:text-emerald-400 rounded-lg transition-all cursor-pointer" data-type="triangle">TRIANGLE</button>
-                        <button class="wave-btn px-4 py-2 bg-slate-950 text-slate-400 border border-slate-800 hover:text-emerald-400 rounded-lg transition-all cursor-pointer" data-type="pwm">PWM PULSE</button>
-                    </div>
-                </div>
-
-                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-                    
-                    <!-- Scope Screen Display -->
-                    <div class="lg:col-span-8 bg-slate-950 border-2 border-emerald-500/50 rounded-2xl p-4 relative shadow-[0_0_30px_rgba(16,185,129,0.15)]">
-                        <div class="absolute top-6 left-6 z-10 font-mono text-[11px] text-emerald-400/90 flex gap-4">
-                            <span>CH1: <strong id="scope-wave-name">SINE WAVE</strong></span>
-                            <span>FREQ: <strong id="scope-freq-val">2.5 kHz</strong></span>
-                            <span>AMP: <strong id="scope-amp-val">5.0 Vpp</strong></span>
-                        </div>
-                        <canvas id="scope-canvas" class="w-full h-72 rounded-lg bg-slate-950"></canvas>
-                    </div>
-
-                    <!-- Scope Controls Knobs / Sliders -->
-                    <div class="lg:col-span-4 space-y-6 font-mono text-xs">
-                        
-                        <div class="p-4 bg-slate-950 border border-slate-800 rounded-xl space-y-3">
-                            <div class="flex justify-between">
-                                <label class="text-slate-300 font-bold">SIGNAL FREQUENCY</label>
-                                <span id="freq-disp" class="text-emerald-400 font-bold">2.5 kHz</span>
-                            </div>
-                            <input type="range" id="freq-slider" min="0.5" max="8.0" step="0.1" value="2.5" class="w-full accent-emerald-400 bg-slate-900 cursor-pointer">
-                        </div>
-
-                        <div class="p-4 bg-slate-950 border border-slate-800 rounded-xl space-y-3">
-                            <div class="flex justify-between">
-                                <label class="text-slate-300 font-bold">VOLTAGE AMPLITUDE</label>
-                                <span id="amp-disp" class="text-cyan-400 font-bold">5.0 Vpp</span>
-                            </div>
-                            <input type="range" id="amp-slider" min="1.0" max="10.0" step="0.5" value="5.0" class="w-full accent-cyan-400 bg-slate-900 cursor-pointer">
-                        </div>
-
-                        <div class="p-4 bg-emerald-950/30 border border-emerald-900/50 rounded-xl text-slate-300 text-[11px] space-y-2">
-                            <div class="font-bold text-emerald-400 flex items-center gap-1.5">
-                                <i data-lucide="info" class="w-3.5 h-3.5"></i>
-                                LAB INSIGHT
-                            </div>
-                            <p>Demonstrates signal processing concepts practiced using Multisim oscilloscopes and microcontroller PWM signal generation.</p>
-                        </div>
-
-                    </div>
-
                 </div>
 
             </div>

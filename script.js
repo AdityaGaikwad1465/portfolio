@@ -1,6 +1,6 @@
 /**
- * Aditya Anand Gaikwad - Bulletproof Portfolio & AI Chatbot Engine
- * Features: PCB Canvas Engine, Live Oscilloscope, Terminal CLI, AI Assistant Bot, Lazy Audio Synth
+ * Aditya Anand Gaikwad - Interactive Portfolio & Comprehensive AI Resume Chatbot
+ * Features: PCB Canvas Engine, Terminal CLI, Smart NLP Resume Bot, Web Audio Synth
  */
 
 (function () {
@@ -169,123 +169,7 @@
         }
 
 
-        // --- 3. LIVE OSCILLOSCOPE SIGNAL SIMULATOR ---
-        const scopeCanvas = document.getElementById('scope-canvas');
-        if (scopeCanvas) {
-            const scopeCtx = scopeCanvas.getContext('2d');
-            let waveType = 'sine';
-            let frequency = 2.5;
-            let amplitude = 5.0;
-            let timePhase = 0;
-
-            const freqSlider = document.getElementById('freq-slider');
-            const ampSlider = document.getElementById('amp-slider');
-            const freqDisp = document.getElementById('freq-disp');
-            const ampDisp = document.getElementById('amp-disp');
-            const scopeWaveName = document.getElementById('scope-wave-name');
-            const scopeFreqVal = document.getElementById('scope-freq-val');
-            const scopeAmpVal = document.getElementById('scope-amp-val');
-
-            if (freqSlider) {
-                freqSlider.addEventListener('input', (e) => {
-                    frequency = parseFloat(e.target.value);
-                    if (freqDisp) freqDisp.textContent = `${frequency.toFixed(1)} kHz`;
-                    if (scopeFreqVal) scopeFreqVal.textContent = `${frequency.toFixed(1)} kHz`;
-                });
-            }
-
-            if (ampSlider) {
-                ampSlider.addEventListener('input', (e) => {
-                    amplitude = parseFloat(e.target.value);
-                    if (ampDisp) ampDisp.textContent = `${amplitude.toFixed(1)} Vpp`;
-                    if (scopeAmpVal) scopeAmpVal.textContent = `${amplitude.toFixed(1)} Vpp`;
-                });
-            }
-
-            document.querySelectorAll('.wave-btn').forEach(btn => {
-                btn.addEventListener('click', () => {
-                    document.querySelectorAll('.wave-btn').forEach(b => {
-                        b.className = 'wave-btn px-4 py-2 bg-slate-950 text-slate-400 border border-slate-800 hover:text-emerald-400 rounded-lg transition-all';
-                    });
-                    btn.className = 'wave-btn px-4 py-2 bg-emerald-500 text-slate-950 font-bold rounded-lg transition-all';
-                    waveType = btn.dataset.type;
-                    if (scopeWaveName) scopeWaveName.textContent = waveType.toUpperCase() + ' WAVE';
-                });
-            });
-
-            function drawOscilloscope() {
-                const w = scopeCanvas.width = scopeCanvas.clientWidth;
-                const h = scopeCanvas.height = scopeCanvas.clientHeight;
-                const centerY = h / 2;
-
-                scopeCtx.clearRect(0, 0, w, h);
-
-                // Scope Grid
-                scopeCtx.strokeStyle = 'rgba(16, 185, 129, 0.08)';
-                scopeCtx.lineWidth = 1;
-                const gridStep = 30;
-
-                for (let x = 0; x < w; x += gridStep) {
-                    scopeCtx.beginPath();
-                    scopeCtx.moveTo(x, 0);
-                    scopeCtx.lineTo(x, h);
-                    scopeCtx.stroke();
-                }
-                for (let y = 0; y < h; y += gridStep) {
-                    scopeCtx.beginPath();
-                    scopeCtx.moveTo(0, y);
-                    scopeCtx.lineTo(w, y);
-                    scopeCtx.stroke();
-                }
-
-                scopeCtx.strokeStyle = 'rgba(16, 185, 129, 0.25)';
-                scopeCtx.beginPath();
-                scopeCtx.moveTo(0, centerY);
-                scopeCtx.lineTo(w, centerY);
-                scopeCtx.moveTo(w / 2, 0);
-                scopeCtx.lineTo(w / 2, h);
-                scopeCtx.stroke();
-
-                scopeCtx.beginPath();
-                scopeCtx.strokeStyle = '#10b981';
-                scopeCtx.lineWidth = 2.5;
-                scopeCtx.shadowBlur = 12;
-                scopeCtx.shadowColor = '#10b981';
-
-                const scaleAmp = (amplitude / 10) * (h * 0.35);
-
-                for (let x = 0; x < w; x++) {
-                    let angle = (x * 0.015 * frequency) + timePhase;
-                    let y = centerY;
-
-                    if (waveType === 'sine') {
-                        y = centerY - Math.sin(angle) * scaleAmp;
-                    } else if (waveType === 'square') {
-                        y = centerY - (Math.sin(angle) >= 0 ? scaleAmp : -scaleAmp);
-                    } else if (waveType === 'triangle') {
-                        let norm = (angle % (Math.PI * 2)) / (Math.PI * 2);
-                        y = centerY - (Math.abs(norm - 0.5) * 4 - 1) * scaleAmp;
-                    } else if (waveType === 'pwm') {
-                        let norm = (angle % (Math.PI * 2)) / (Math.PI * 2);
-                        y = centerY - (norm < 0.25 ? scaleAmp : -scaleAmp);
-                    }
-
-                    if (x === 0) scopeCtx.moveTo(x, y);
-                    else scopeCtx.lineTo(x, y);
-                }
-
-                scopeCtx.stroke();
-                scopeCtx.shadowBlur = 0;
-
-                timePhase += 0.08 * (frequency / 2);
-                requestAnimationFrame(drawOscilloscope);
-            }
-
-            drawOscilloscope();
-        }
-
-
-        // --- 4. HARDWARE CLI TERMINAL CONSOLE ---
+        // --- 3. HARDWARE CLI TERMINAL CONSOLE ---
         const termInput = document.getElementById('terminal-input');
         const termBody = document.getElementById('terminal-body');
         const clearBtn = document.getElementById('clear-term-btn');
@@ -376,7 +260,7 @@
         }
 
 
-        // --- 5. FULLY FUNCTIONAL AI CHATBOT ENGINE ---
+        // --- 4. COMPREHENSIVE SMART AI CHATBOT ENGINE ---
         const chatToggleBtn = document.getElementById('chatbot-toggle-btn');
         const chatWindow = document.getElementById('chatbot-window');
         const chatCloseBtn = document.getElementById('chatbot-close-btn');
@@ -386,7 +270,7 @@
 
         function toggleChatWindow() {
             if (!chatWindow) return;
-            const isHidden = chatWindow.classList.contains('hidden');
+            const isHidden = chatWindow.classList.contains('hidden') || chatWindow.style.display === 'none';
             if (isHidden) {
                 chatWindow.classList.remove('hidden');
                 chatWindow.style.display = 'flex';
@@ -417,39 +301,72 @@
             });
         }
 
-        // Response Generator for Aditya's Resume
+        // Comprehensive Intelligence Engine covering EVERY detail of Aditya's resume
         function getBotResponse(query) {
             const q = query.toLowerCase();
 
-            if (q.includes('ev') || q.includes('charging') || q.includes('wireless charging') || q.includes('vehicle')) {
-                return `<strong>Wireless Charging Station for EVs</strong>:<br>Aditya simulated an inductive coil power transfer circuit for EV charging using Proteus & Multisim. It includes high-frequency LC resonance, AC-to-DC rectification, and voltage regulation for battery charging! ⚡`;
+            // 1. Professional Summary / Overview / Bio
+            if (q.includes('who') || q.includes('about') || q.includes('summary') || q.includes('overview') || q.includes('bio') || q.includes('profile') || q.includes('tell me about aditya')) {
+                return `<strong>Aditya Anand Gaikwad</strong> is a final-year <em>Electronics and Communication Engineering (ECE)</em> student at Anantrao Pawar College of Engineering & Research, Pune.<br><br>He has hands-on laboratory experience in <strong>embedded systems</strong>, <strong>microcontroller programming</strong>, <strong>circuit design & simulation</strong> (Arduino, Embedded C, Multisim, Proteus, PCB Layout), and <strong>Python</strong>. He is reliable, detail-oriented, and seeking an internship or entry-level role in electronics or hardware engineering! 🚀`;
             }
 
-            if (q.includes('alcohol') || q.includes('mq-3') || q.includes('sensor') || q.includes('ignition') || q.includes('detection')) {
-                return `<strong>Alcohol Detection System</strong>:<br>Aditya built a vehicle safety system using an Arduino MCU and an MQ-3 gas sensor. Written in Embedded C, it triggers a buzzer alarm & a relay-based ignition cutoff whenever alcohol levels exceed threshold! 🚗🛑`;
+            // 2. EV Wireless Charging Project
+            if (q.includes('ev') || q.includes('wireless charging') || q.includes('power transfer') || q.includes('electric vehicle') || q.includes('inductive') || q.includes('rectification')) {
+                return `⚡ <strong>Wireless Charging Station for Electric Vehicles</strong> (Academic Project):<br>Aditya simulated an inductive coil-based wireless power transfer circuit for EV charging using <strong>Proteus</strong> and <strong>Multisim</strong>. Key features include:<br>• Inductive resonance coil coupling<br>• High-frequency AC-to-DC rectification<br>• Precise voltage regulation for EV battery charging!`;
             }
 
-            if (q.includes('project') || q.includes('work') || q.includes('build')) {
-                return `Aditya has built 2 core academic projects:<br>1. <strong>Wireless EV Charging Station</strong> (Proteus / Multisim)<br>2. <strong>MQ-3 Alcohol Detection & Ignition Cutoff</strong> (Arduino & Embedded C)<br>Both highlight his ECE circuit design & hardware skills!`;
+            // 3. Alcohol Detection System Project
+            if (q.includes('alcohol') || q.includes('mq-3') || q.includes('mq3') || q.includes('ignition') || q.includes('cutoff') || q.includes('buzzer') || q.includes('gas sensor') || q.includes('safety')) {
+                return `🚗 <strong>Alcohol Detection System with Ignition Cutoff</strong> (Academic Project):<br>Aditya built an automated safety system using an <strong>Arduino MCU</strong> and an <strong>MQ-3 gas sensor</strong>. Features include:<br>• Programmed low-level <strong>Embedded C</strong> logic<br>• Triggers a loud buzzer alarm when BAC exceeds threshold<br>• Engages a relay-based engine ignition cutoff to prevent drunk driving!`;
             }
 
-            if (q.includes('skill') || q.includes('arduino') || q.includes('embedded') || q.includes('multisim') || q.includes('python')) {
-                return `Aditya's technical stack includes:<br>• <strong>Embedded Systems & Hardware</strong>: Arduino, Embedded C, Microcontroller Interfacing<br>• <strong>Circuit Design & Simulation</strong>: Multisim, Proteus, PCB Design<br>• <strong>Programming</strong>: Python (Certified basic)<br>• <strong>Core ECE</strong>: IoT & Communication Networks`;
+            // 4. Projects General
+            if (q.includes('project') || q.includes('work') || q.includes('academic project') || q.includes('build')) {
+                return `🛠️ <strong>Aditya's Academic Projects</strong>:<br><br>1. <strong>Wireless Charging Station for EVs</strong>: Simulated inductive coil wireless power transfer using Proteus & Multisim.<br><br>2. <strong>Alcohol Detection System</strong>: Built an Arduino + MQ-3 sensor safety system with Embedded C buzzer alarm & relay ignition cutoff.`;
             }
 
-            if (q.includes('education') || q.includes('college') || q.includes('pune') || q.includes('degree')) {
-                return `Aditya is currently pursuing his <strong>Bachelor of Engineering in Electronics & Communication Engineering</strong> at <strong>Anantrao Pawar College of Engineering & Research, Pune</strong> (Aug 2023 - Present).`;
+            // 5. Hardware & MCU Skills (Arduino, Embedded C, Interfacing)
+            if (q.includes('arduino') || q.includes('embedded c') || q.includes('microcontroller') || q.includes('mcu') || q.includes('interfacing') || q.includes('hardware') || q.includes('sensor')) {
+                return `📟 <strong>Embedded Systems & Hardware Skills</strong>:<br>• <strong>Microcontrollers</strong>: Arduino & MCU pin interfacing<br>• <strong>Programming</strong>: Embedded C for low-level I/O & sensor reading<br>• <strong>Interfacing</strong>: Gas sensors (MQ-3), relays, buzzers, analog-to-digital signals.`;
             }
 
-            if (q.includes('contact') || q.includes('email') || q.includes('phone') || q.includes('reach') || q.includes('hire')) {
-                return `You can reach Aditya Gaikwad directly:<br>📧 <strong>Email</strong>: adityagaikwad1465@gmail.com<br>📞 <strong>Phone</strong>: +91 9730391363<br>📍 <strong>Location</strong>: Pune, Maharashtra, India`;
+            // 6. Circuit Simulation & PCB Design (Multisim, Proteus, PCB)
+            if (q.includes('multisim') || q.includes('proteus') || q.includes('pcb') || q.includes('circuit') || q.includes('simulation') || q.includes('schematic')) {
+                return `🔌 <strong>Circuit Design & Simulation Tools</strong>:<br>• <strong>NI Multisim</strong>: Analog & digital circuit testing and AC/DC signal analysis.<br>• <strong>Proteus Design Suite</strong>: Circuit schematic capture & hardware simulation.<br>• <strong>PCB Design</strong>: Hands-on PCB layout fundamentals and component routing.`;
             }
 
-            if (q.includes('hello') || q.includes('hi') || q.includes('hey')) {
-                return `Greetings! I am Aditya's ECE AI Assistant. Feel free to ask me about his <strong>EV Wireless Charging</strong> project, <strong>Alcohol Detection System</strong>, skills, or contact info!`;
+            // 7. Programming & Technical Stack (Python, IoT, Communication)
+            if (q.includes('python') || q.includes('programming') || q.includes('code') || q.includes('iot') || q.includes('communication') || q.includes('network') || q.includes('tech stack')) {
+                return `💻 <strong>Programming & Core Domains</strong>:<br>• <strong>Python</strong>: Certified basic programming skills.<br>• <strong>Embedded C</strong>: Intermediate firmware coding.<br>• <strong>Core Knowledge</strong>: Internet of Things (IoT), Communication Networks, Electronics.`;
             }
 
-            return `I can answer questions regarding Aditya's resume! Try asking about his <strong>EV Wireless Charging Project</strong>, <strong>Alcohol Detection System</strong>, <strong>Arduino & Embedded C skills</strong>, or <strong>contact info</strong>.`;
+            // 8. Education & Marks / Percentages (College, HSC, SSC)
+            if (q.includes('education') || q.includes('college') || q.includes('school') || q.includes('marks') || q.includes('gpa') || q.includes('percentage') || q.includes('hsc') || q.includes('ssc') || q.includes('degree') || q.includes('latur') || q.includes('pune') || q.includes('study')) {
+                return `🎓 <strong>Academic Qualifications</strong>:<br><br>1. <strong>Anantrao Pawar College of Engineering & Research, Pune</strong> (Aug 2023 – Present)<br>• Bachelor of Engineering (B.E.) in Electronics & Communication Engineering — <em>Final Year</em><br><br>2. <strong>Milind Junior College, Latur</strong> (2022 – 2023)<br>• Higher Secondary Certificate (HSC) — <strong>55.33%</strong><br><br>3. <strong>Shri Deshikendra School, Latur</strong> (2020 – 2021)<br>• Secondary School Certificate (SSC) — <strong>77.40%</strong>`;
+            }
+
+            // 9. Soft Skills & Languages
+            if (q.includes('soft skill') || q.includes('leadership') || q.includes('team') || q.includes('collaboration') || q.includes('language') || q.includes('speak') || q.includes('english') || q.includes('hindi') || q.includes('marathi')) {
+                return `🤝 <strong>Soft Skills & Languages</strong>:<br>• <strong>Soft Skills</strong>: Collaboration, Leadership, Teamwork, Time Management.<br>• <strong>Languages Spoken</strong>: English (Professional), Hindi (Fluent), Marathi (Native).`;
+            }
+
+            // 10. Certifications
+            if (q.includes('certif') || q.includes('course') || q.includes('certificate')) {
+                return `📜 <strong>Certifications</strong>:<br>• <strong>Python Programming Certification</strong>`;
+            }
+
+            // 11. Contact Info & Internship Availability
+            if (q.includes('contact') || q.includes('email') || q.includes('phone') || q.includes('number') || q.includes('reach') || q.includes('hire') || q.includes('intern') || q.includes('location') || q.includes('address')) {
+                return `📡 <strong>Contact Telemetry & Internship Status</strong>:<br>• <strong>Status</strong>: Seeking ECE / Embedded Systems Internship & Entry-Level Roles<br>• <strong>Email</strong>: <a href="mailto:adityagaikwad1465@gmail.com" class="text-emerald-400 underline">adityagaikwad1465@gmail.com</a><br>• <strong>Phone</strong>: <a href="tel:9730391363" class="text-cyan-400 underline">+91 9730391363</a><br>• <strong>Location</strong>: Pune, Maharashtra, India`;
+            }
+
+            // 12. Greetings / Salutations
+            if (q.includes('hello') || q.includes('hi') || q.includes('hey') || q.includes('good morning') || q.includes('good evening') || q.includes('namaste')) {
+                return `Hello! 👋 I am Aditya's AI Assistant. Ask me anything about his <strong>EV Wireless Charging Project</strong>, <strong>Alcohol Detection System</strong>, <strong>Embedded C / Arduino skills</strong>, <strong>Education & Marks</strong>, or <strong>Contact info</strong>!`;
+            }
+
+            // Default Fallback with Helpful Tips
+            return `I am programmed with full knowledge of <strong>Aditya Gaikwad's Resume</strong>!<br><br>Try asking about:<br>• <em>"EV Wireless Charging project"</em><br>• <em>"Alcohol Detection System"</em><br>• <em>"Technical skills & Proteus/Multisim"</em><br>• <em>"Education, College & Marks"</em><br>• <em>"Contact & Phone number"</em>`;
         }
 
         function addChatMessage(sender, text) {
@@ -472,7 +389,7 @@
                     <div class="w-7 h-7 rounded bg-emerald-950 border border-emerald-500/40 flex items-center justify-center text-emerald-400 shrink-0 font-bold text-xs">
                         AI
                     </div>
-                    <div class="bg-slate-900 border border-emerald-500/30 text-slate-200 p-3 rounded-xl rounded-tl-none leading-relaxed max-w-[85%]">
+                    <div class="bg-slate-900 border border-emerald-500/30 text-slate-200 p-3 rounded-xl rounded-tl-none leading-relaxed max-w-[88%]">
                         ${text}
                     </div>
                 `;
@@ -485,7 +402,7 @@
         function handleUserSubmit(userMsg) {
             if (!userMsg) return;
 
-            if (chatWindow && chatWindow.classList.contains('hidden')) {
+            if (chatWindow && (chatWindow.classList.contains('hidden') || chatWindow.style.display === 'none')) {
                 chatWindow.classList.remove('hidden');
                 chatWindow.style.display = 'flex';
             }
@@ -518,7 +435,7 @@
         });
 
 
-        // --- 6. UTILITY HANDLERS (Copy Email, Mobile Menu, Form) ---
+        // --- 5. UTILITY HANDLERS (Copy Email, Mobile Menu, Form) ---
         const copyBtn = document.getElementById('copy-email-btn');
         const copyText = document.getElementById('copy-text');
 
@@ -576,7 +493,6 @@
         }
     }
 
-    // Safeguard initialization: execute immediately if DOM is ready, else listen
     if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', initPortfolio);
     } else {
