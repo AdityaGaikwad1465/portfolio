@@ -1,6 +1,6 @@
 /**
- * Aditya Anand Gaikwad - Interactive Portfolio Engine
- * PCB Circuit Canvas, Live Oscilloscope Simulator, Terminal CLI, Audio Synth
+ * Aditya Anand Gaikwad - Interactive Portfolio Engine & AI Chatbot
+ * Features: PCB Canvas Engine, Live Oscilloscope, Terminal CLI, AI Assistant Bot, Audio Synth
  */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -40,7 +40,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Attach beep to interactive buttons
+    // Attach beep to interactive elements
     document.querySelectorAll('button, a').forEach(el => {
         el.addEventListener('mouseenter', () => playCyberBeep(600, 'sine', 0.03));
         el.addEventListener('click', () => playCyberBeep(900, 'triangle', 0.06));
@@ -52,7 +52,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const ctx = canvas.getContext('2d');
     let width, height;
     let nodes = [];
-    let connections = [];
     let mouse = { x: null, y: null, radius: 150 };
 
     function resizeCanvas() {
@@ -71,8 +70,6 @@ document.addEventListener('DOMContentLoaded', () => {
         constructor(x, y) {
             this.x = x;
             this.y = y;
-            this.baseX = x;
-            this.baseY = y;
             this.size = Math.random() * 2.5 + 1.5;
             this.vx = (Math.random() - 0.5) * 0.5;
             this.vy = (Math.random() - 0.5) * 0.5;
@@ -88,7 +85,6 @@ document.addEventListener('DOMContentLoaded', () => {
             if (this.x < 0 || this.x > width) this.vx *= -1;
             if (this.y < 0 || this.y > height) this.vy *= -1;
 
-            // Mouse magnet effect
             if (mouse.x && mouse.y) {
                 let dx = mouse.x - this.x;
                 let dy = mouse.y - this.y;
@@ -123,7 +119,6 @@ document.addEventListener('DOMContentLoaded', () => {
     function animateCircuit() {
         ctx.clearRect(0, 0, width, height);
 
-        // Draw connections (PCB Traces)
         for (let i = 0; i < nodes.length; i++) {
             for (let j = i + 1; j < nodes.length; j++) {
                 let dx = nodes[i].x - nodes[j].x;
@@ -132,7 +127,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 if (dist < 130) {
                     ctx.beginPath();
-                    // Orthogonal / PCB trace style step line
                     ctx.moveTo(nodes[i].x, nodes[i].y);
                     ctx.lineTo(nodes[i].x, nodes[j].y);
                     ctx.lineTo(nodes[j].x, nodes[j].y);
@@ -209,7 +203,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
         scopeCtx.clearRect(0, 0, w, h);
 
-        // Draw Scope Grid Lines
         scopeCtx.strokeStyle = 'rgba(16, 185, 129, 0.08)';
         scopeCtx.lineWidth = 1;
         const gridStep = 30;
@@ -227,7 +220,6 @@ document.addEventListener('DOMContentLoaded', () => {
             scopeCtx.stroke();
         }
 
-        // Center Axis Lines
         scopeCtx.strokeStyle = 'rgba(16, 185, 129, 0.25)';
         scopeCtx.beginPath();
         scopeCtx.moveTo(0, centerY);
@@ -236,7 +228,6 @@ document.addEventListener('DOMContentLoaded', () => {
         scopeCtx.lineTo(w / 2, h);
         scopeCtx.stroke();
 
-        // Draw Signal Trace
         scopeCtx.beginPath();
         scopeCtx.strokeStyle = '#10b981';
         scopeCtx.lineWidth = 2.5;
@@ -282,31 +273,34 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const commands = {
         help: `Available commands:
- - <span class="text-emerald-400 font-bold">skills</span>     : Display technical skills & microcontroller specs
- - <span class="text-cyan-400 font-bold">education</span>  : Show academic qualifications & college details
- - <span class="text-teal-400 font-bold">lab-exp</span>    : List hands-on ECE lab experience
+ - <span class="text-emerald-400 font-bold">projects</span>   : Show academic projects (EV Wireless & Alcohol System)
+ - <span class="text-cyan-400 font-bold">skills</span>     : Display technical skills & microcontroller specs
+ - <span class="text-teal-400 font-bold">education</span>  : Show academic qualifications & college details
  - <span class="text-purple-400 font-bold">contact</span>   : Print email, phone & location info
  - <span class="text-amber-400 font-bold">clear</span>     : Clear the terminal screen`,
 
-        skills: `<span class="text-emerald-400 font-bold">[TECHNICAL SKILLS MATRIX]</span>
+        projects: `<span class="text-emerald-400 font-bold">[ACADEMIC PROJECTS]</span>
+ 1. <strong class="text-white">Wireless Charging Station for Electric Vehicles</strong>
+    • Simulated inductive coil power transfer using Proteus & Multisim.
+    • Built AC-DC rectification and LC resonant voltage regulation logic.
+ 2. <strong class="text-white">Alcohol Detection System with Ignition Cutoff</strong>
+    • Integrated Arduino MCU with MQ-3 alcohol sensor.
+    • Written in Embedded C to trigger buzzer alarm and relay engine cutoff above threshold.`,
+
+        skills: `<span class="text-cyan-400 font-bold">[TECHNICAL SKILLS MATRIX]</span>
  • Hardware & MCUs  : Arduino, Embedded C, Microcontroller Interfacing (Sensors/IO)
  • Circuit Design   : Multisim, Proteus, PCB Layout Basics
  • Programming      : Python (Certified basic)
  • Core Knowledge   : Embedded Systems, IoT, Communication Networks, Electronics
  • Soft Skills      : Leadership, Collaboration, Time Management`,
 
-        education: `<span class="text-cyan-400 font-bold">[ACADEMIC CREDENTIALS]</span>
+        education: `<span class="text-teal-400 font-bold">[ACADEMIC CREDENTIALS]</span>
  1. Anantrao Pawar College of Engineering & Research, Pune (Aug 2023 - Present)
     Degree: Bachelor of Engineering (ECE) - Final Year Student
  2. Milind Junior College, Latur (2022 - 2023)
     HSC: 55.33%
  3. Shri Deshikendra School, Latur (2020 - 2021)
     SSC: 77.40%`,
-
-        'lab-exp': `<span class="text-teal-400 font-bold">[ACADEMIC LAB EXPERIENCES]</span>
- [1] Microcontroller Programming: Sensor & I/O interfacing with Arduino & Embedded C.
- [2] Circuit Simulation: Analog & digital testing with Multisim & Proteus.
- [3] PCB Layout: Practical routing & layout design in ECE lab modules.`,
 
         contact: `<span class="text-purple-400 font-bold">[CONTACT TELEMETRY]</span>
  • Name     : ADITYA ANAND GAIKWAD
@@ -363,7 +357,134 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
 
-    // --- 5. UTILITY HANDLERS (Copy Email, Mobile Menu, Form) ---
+    // --- 5. INTERACTIVE AI CHATBOT ENGINE ---
+    const chatToggleBtn = document.getElementById('chatbot-toggle-btn');
+    const chatWindow = document.getElementById('chatbot-window');
+    const chatCloseBtn = document.getElementById('chatbot-close-btn');
+    const chatForm = document.getElementById('chat-form');
+    const chatInput = document.getElementById('chat-input');
+    const chatMessages = document.getElementById('chat-messages');
+
+    if (chatToggleBtn && chatWindow) {
+        chatToggleBtn.addEventListener('click', () => {
+            chatWindow.classList.toggle('hidden');
+            playCyberBeep(1100, 'sine', 0.08);
+            if (!chatWindow.classList.contains('hidden') && chatInput) {
+                chatInput.focus();
+            }
+        });
+    }
+
+    if (chatCloseBtn && chatWindow) {
+        chatCloseBtn.addEventListener('click', () => {
+            chatWindow.classList.add('hidden');
+            playCyberBeep(800, 'sine', 0.05);
+        });
+    }
+
+    // Knowledge Base Bot Response Generator
+    function getBotResponse(query) {
+        const q = query.toLowerCase();
+
+        if (q.includes('ev') || q.includes('charging') || q.includes('wireless charging') || q.includes('vehicle')) {
+            return `<strong>Wireless Charging Station for EVs</strong>:<br>Aditya simulated an inductive coil power transfer circuit using Proteus & Multisim. It includes high-frequency LC resonance, AC-to-DC rectification, and voltage regulation for EV battery charging! ⚡`;
+        }
+
+        if (q.includes('alcohol') || q.includes('mq-3') || q.includes('sensor') || q.includes('ignition') || q.includes('detection')) {
+            return `<strong>Alcohol Detection System</strong>:<br>Aditya built a vehicle safety system using an Arduino MCU and an MQ-3 gas sensor. Written in Embedded C, it triggers a buzzer alarm & a relay-based ignition cutoff whenever alcohol levels exceed threshold! 🚗🛑`;
+        }
+
+        if (q.includes('project') || q.includes('work') || q.includes('build')) {
+            return `Aditya has built 2 core academic projects:<br>1. <strong>Wireless EV Charging Station</strong> (Proteus / Multisim)<br>2. <strong>MQ-3 Alcohol Detection & Ignition Cutoff</strong> (Arduino & Embedded C)<br>Both highlight his ECE circuit design & hardware skills!`;
+        }
+
+        if (q.includes('skill') || q.includes('arduino') || q.includes('embedded') || q.includes('multisim') || q.includes('python')) {
+            return `Aditya's technical stack includes:<br>• <strong>Embedded Systems & Hardware</strong>: Arduino, Embedded C, Microcontroller Interfacing<br>• <strong>Circuit Design & Simulation</strong>: Multisim, Proteus, PCB Design<br>• <strong>Programming</strong>: Python (Certified basic)<br>• <strong>Core ECE</strong>: IoT & Communication Networks`;
+        }
+
+        if (q.includes('education') || q.includes('college') || q.includes('pune') || q.includes('degree')) {
+            return `Aditya is currently pursuing his <strong>Bachelor of Engineering in Electronics & Communication Engineering</strong> at <strong>Anantrao Pawar College of Engineering & Research, Pune</strong> (Aug 2023 - Present).`;
+        }
+
+        if (q.includes('contact') || q.includes('email') || q.includes('phone') || q.includes('reach') || q.includes('hire')) {
+            return `You can reach Aditya Gaikwad directly:<br>📧 <strong>Email</strong>: adityagaikwad1465@gmail.com<br>📞 <strong>Phone</strong>: +91 9730391363<br>📍 <strong>Location</strong>: Pune, Maharashtra, India`;
+        }
+
+        if (q.includes('hello') || q.includes('hi') || q.includes('hey')) {
+            return `Greetings! I am Aditya's ECE AI Assistant. Feel free to ask me about his <strong>EV Wireless Charging</strong> project, <strong>Alcohol Detection System</strong>, skills, or contact info!`;
+        }
+
+        return `I can answer questions regarding Aditya's resume! Try asking about his <strong>EV Wireless Charging Project</strong>, <strong>Alcohol Detection System</strong>, <strong>Arduino & Embedded C skills</strong>, or <strong>contact info</strong>.`;
+    }
+
+    function addChatMessage(sender, text) {
+        if (!chatMessages) return;
+
+        const msgDiv = document.createElement('div');
+        msgDiv.className = `flex gap-2.5 items-start ${sender === 'user' ? 'justify-end' : ''}`;
+
+        if (sender === 'user') {
+            msgDiv.innerHTML = `
+                <div class="bg-emerald-500 text-slate-950 font-bold p-3 rounded-xl rounded-tr-none leading-relaxed max-w-[85%]">
+                    ${text}
+                </div>
+                <div class="w-7 h-7 rounded bg-emerald-400 flex items-center justify-center text-slate-950 shrink-0 font-bold">
+                    U
+                </div>
+            `;
+        } else {
+            msgDiv.innerHTML = `
+                <div class="w-7 h-7 rounded bg-emerald-950 border border-emerald-500/40 flex items-center justify-center text-emerald-400 shrink-0">
+                    <i data-lucide="bot" class="w-4 h-4"></i>
+                </div>
+                <div class="bg-slate-900 border border-emerald-500/30 text-slate-200 p-3 rounded-xl rounded-tl-none leading-relaxed max-w-[85%]">
+                    ${text}
+                </div>
+            `;
+        }
+
+        chatMessages.appendChild(msgDiv);
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+        if (window.lucide) lucide.createIcons();
+    }
+
+    if (chatForm && chatInput) {
+        chatForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const userMsg = chatInput.value.trim();
+            if (!userMsg) return;
+
+            addChatMessage('user', userMsg);
+            chatInput.value = '';
+            playCyberBeep(1200, 'sine', 0.05);
+
+            // Bot response delay for realistic typing simulation
+            setTimeout(() => {
+                const botReply = getBotResponse(userMsg);
+                addChatMessage('bot', botReply);
+                playCyberBeep(1400, 'square', 0.08);
+            }, 400);
+        });
+    }
+
+    document.querySelectorAll('.chat-chip').forEach(chip => {
+        chip.addEventListener('click', () => {
+            const promptText = chip.textContent.trim();
+            if (chatWindow && chatWindow.classList.contains('hidden')) {
+                chatWindow.classList.remove('hidden');
+            }
+            addChatMessage('user', promptText);
+            playCyberBeep(1200, 'sine', 0.05);
+            setTimeout(() => {
+                const botReply = getBotResponse(promptText);
+                addChatMessage('bot', botReply);
+                playCyberBeep(1400, 'square', 0.08);
+            }, 300);
+        });
+    });
+
+
+    // --- 6. UTILITY HANDLERS (Copy Email, Mobile Menu, Form) ---
     const copyBtn = document.getElementById('copy-email-btn');
     const copyText = document.getElementById('copy-text');
 
@@ -382,7 +503,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // System Pulse button animation effect
     const themePulseBtn = document.getElementById('theme-pulse');
     if (themePulseBtn) {
         themePulseBtn.addEventListener('click', () => {
@@ -392,7 +512,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Mobile Menu
     const mobileBtn = document.getElementById('mobile-menu-btn');
     const mobileMenu = document.getElementById('mobile-menu');
 
@@ -402,7 +521,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Contact Form Submission
     const contactForm = document.getElementById('contact-form');
     const formStatus = document.getElementById('form-status');
 
@@ -413,7 +531,6 @@ document.addEventListener('DOMContentLoaded', () => {
             const email = document.getElementById('contact-email').value;
             const message = document.getElementById('contact-message').value;
 
-            // Direct mailto trigger
             const mailtoUri = `mailto:adityagaikwad1465@gmail.com?subject=Portfolio%20Inquiry%20from%20${encodeURIComponent(name)}&body=${encodeURIComponent(message)}%0A%0AFrom:%20${encodeURIComponent(email)}`;
             window.location.href = mailtoUri;
 

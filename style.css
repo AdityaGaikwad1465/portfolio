@@ -15,6 +15,15 @@
     background: #10b981;
 }
 
+/* Chat Messages Scrollbar */
+.no-scrollbar::-webkit-scrollbar {
+    display: none;
+}
+.no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
 /* Base Body Styles */
 body {
     background-color: #020617;
@@ -78,6 +87,22 @@ body::before {
 }
 .nav-link:hover::after {
     width: 100%;
+}
+
+/* Chatbot Floating Window Shadow & Pulse */
+#chatbot-window {
+    animation: chatSlideUp 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes chatSlideUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px) scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
 }
 
 /* Terminal Input glow */
