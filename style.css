@@ -89,19 +89,19 @@ body::before {
     width: 100%;
 }
 
-/* Chatbot Floating Window Positioning & Visibility */
+/* STRICT Chatbot Floating Window Positioning & Visibility */
 #chatbot-window {
     position: fixed !important;
     bottom: 96px !important;
     right: 24px !important;
     width: min(440px, 92vw) !important;
-    height: 520px !important;
+    height: 540px !important;
     z-index: 99999 !important;
-    opacity: 0;
-    visibility: hidden;
-    pointer-events: none;
-    transform: translateY(20px) scale(0.95);
-    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    opacity: 0 !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
+    transform: translateY(20px) scale(0.95) !important;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
 }
 
 #chatbot-window.chat-open {
@@ -115,7 +115,7 @@ body::before {
     #chatbot-window {
         right: 4vw !important;
         bottom: 84px !important;
-        height: 480px !important;
+        height: 490px !important;
     }
 }
 
