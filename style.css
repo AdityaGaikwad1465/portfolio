@@ -94,14 +94,16 @@ body::before {
     position: fixed !important;
     bottom: 96px !important;
     right: 24px !important;
-    width: min(440px, 92vw) !important;
-    height: 540px !important;
-    z-index: 99999 !important;
+    width: min(440px, 94vw) !important;
+    height: 520px !important;
+    z-index: 999999 !important;
+    display: flex !important;
+    flex-direction: column !important;
     opacity: 0 !important;
     visibility: hidden !important;
     pointer-events: none !important;
     transform: translateY(20px) scale(0.95) !important;
-    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
+    transition: opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1), transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
 }
 
 #chatbot-window.chat-open {
@@ -113,9 +115,9 @@ body::before {
 
 @media (max-width: 640px) {
     #chatbot-window {
-        right: 4vw !important;
+        right: 3vw !important;
         bottom: 84px !important;
-        height: 490px !important;
+        height: 480px !important;
     }
 }
 
