@@ -1,4 +1,4 @@
-/* Custom Hardware Cyber CSS for Aditya Anand Gaikwad Portfolio */
+/* Clean Modern Portfolio CSS for Aditya Anand Gaikwad */
 
 /* Custom Scrollbar */
 ::-webkit-scrollbar {
@@ -15,15 +15,6 @@
     background: #10b981;
 }
 
-/* Chat Messages Scrollbar */
-.no-scrollbar::-webkit-scrollbar {
-    display: none;
-}
-.no-scrollbar {
-    -ms-overflow-style: none;
-    scrollbar-width: none;
-}
-
 /* Base Body Styles */
 body {
     background-color: #020617;
@@ -34,111 +25,7 @@ body {
     background-attachment: fixed;
 }
 
-/* Subtle Grid Pattern Overlay */
-body::before {
-    content: '';
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background-size: 40px 40px;
-    background-image: 
-        linear-gradient(to right, rgba(16, 185, 129, 0.03) 1px, transparent 1px),
-        linear-gradient(to bottom, rgba(16, 185, 129, 0.03) 1px, transparent 1px);
-    pointer-events: none;
-    z-index: 1;
-}
-
-/* Cyber Card Styling */
-.cyber-card {
-    position: relative;
-    backdrop-filter: blur(16px);
-}
-
-.cyber-card::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 1px;
-    background: linear-gradient(90deg, transparent, rgba(16, 185, 129, 0.4), transparent);
-}
-
-.cyber-card:hover {
-    transform: translateY(-2px);
-}
-
-/* Nav Link Hover Line */
-.nav-link {
-    position: relative;
-}
-.nav-link::after {
-    content: '';
-    position: absolute;
-    bottom: -4px;
-    left: 0;
-    width: 0%;
-    height: 2px;
-    background-color: #10b981;
-    transition: width 0.3s ease;
-    box-shadow: 0 0 8px rgba(16, 185, 129, 0.8);
-}
-.nav-link:hover::after {
-    width: 100%;
-}
-
-/* STRICT Chatbot Floating Window Positioning & Visibility */
-#chatbot-window {
-    position: fixed !important;
-    bottom: 96px !important;
-    right: 24px !important;
-    width: min(440px, 94vw) !important;
-    height: 520px !important;
-    z-index: 999999 !important;
-    display: flex !important;
-    flex-direction: column !important;
-    opacity: 0 !important;
-    visibility: hidden !important;
-    pointer-events: none !important;
-    transform: translateY(20px) scale(0.95) !important;
-    transition: opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1), transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
-}
-
-#chatbot-window.chat-open {
-    opacity: 1 !important;
-    visibility: visible !important;
-    pointer-events: auto !important;
-    transform: translateY(0) scale(1) !important;
-}
-
-@media (max-width: 640px) {
-    #chatbot-window {
-        right: 3vw !important;
-        bottom: 84px !important;
-        height: 480px !important;
-    }
-}
-
-/* Terminal Input glow */
-#terminal-input:focus {
-    box-shadow: none;
-}
-
-/* Pulse Animation for System Theme */
-@keyframes cyberPulse {
-    0% {
-        box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
-    }
-    70% {
-        box-shadow: 0 0 0 20px rgba(16, 185, 129, 0);
-    }
-    100% {
-        box-shadow: 0 0 0 0 rgba(16, 185, 129, 0);
-    }
-}
-
-.pulse-active {
-    animation: cyberPulse 1.5s infinite;
+/* Smooth Scrolling */
+html {
+    scroll-behavior: smooth;
 }
